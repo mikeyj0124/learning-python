@@ -49,9 +49,18 @@ def main():
     has_student_id = input("Do you have a student ID? ").strip().lower()
     has_student_id = is_yes(has_student_id)
     hour = int(input("what hour is your movie? (8-23) "))
+    while hour < 8 or hour > 23:
+        print("That is not a correct time available, please select another time")
+        hour = int(input("what hour is your movie? (8-23) "))
     is_matinee_time = is_matinee(hour)
     price = get_ticket_price(age_group, is_3d, is_matinee_time)
-    print(price)
+    if has_student_id:
+        price = price * 0.9
+    movie_type = "3D" if is_3d else "2D"
+    article = "an" if age_group == "adult" else "a"
+
+    print(f"Thank you for watching with us. Your total today for {article} {age_group}, watching a {movie_type} movie at {hour}:00 comes out to ${price:.2f} Thank you!")
+
 
 
 main()
